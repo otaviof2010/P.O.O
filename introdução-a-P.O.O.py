@@ -29,3 +29,7 @@ amor2.falar()
 amor2.andar()
 
 print(type(amor.amor1))
+
+amor1 = amor2
+print(amor1)
+print(amor2)

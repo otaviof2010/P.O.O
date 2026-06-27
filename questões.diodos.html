@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Questões — Diodos Semicondutores | Eletrônica Analógica — IFRN</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fonte: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans: 'Source Sans 3', Arial, sans-serif;
+  --mono: 'Courier New', monospace;
+  --verde-ifrn: #2f9e41;
+  --preto: #111;
+  --cinza: #444;
+  --cinza-claro: #888;
+  --borda: #bbb;
+  --bg-campo: #f5f5f5;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--fonte);
+  font-size: 12pt;
+  background: #d0d0d0;
+  color: var(--preto);
+  line-height: 1.65;
+}
+
+.pagina {
+  max-width: 21cm;
+  margin: 24px auto;
+  background: #fff;
+  padding: 2cm 2.5cm 3cm 3cm;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+
+/* ===== CABEÇALHO IFRN ===== */
+.cabecalho {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.cabecalho img {
+  height: 64px;
+}
+.cabecalho-curso {
+  font-family: var(--sans);
+  font-size: 12pt;
+  font-weight: 600;
+  text-align: center;
+  margin: 6px 0 0;
+}
+.linha-hr {
+  border: none;
+  border-top: 1.5px solid var(--preto);
+  margin: 8px 0;
+}
+.linha-nome-data {
+  font-family: var(--sans);
+  font-size: 11pt;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 6px 0 4px;
+}
+.linha-nome-data .label { white-space: nowrap; }
+.nome-sublinhado {
+  flex: 1;
+  border-bottom: 1px solid var(--preto);
+  min-width: 60px;
+}
+.data-campo { white-space: nowrap; font-weight: 600; }
+
+/* ===== TÍTULO DISCIPLINA ===== */
+.titulo-disciplina {
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 15pt;
+  font-weight: 700;
+  margin: 10px 0 2px;
+  letter-spacing: 0.3px;
+}
+.subtitulo-lista {
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 10.5pt;
+  color: var(--cinza);
+  margin-bottom: 22px;
+}
+
+/* ===== SEÇÕES ===== */
+.secao { margin-bottom: 28px; }
+.secao-titulo {
+  font-family: var(--sans);
+  font-size: 12pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 22px 0 12px;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--preto);
+}
+.secao-titulo .intervalo {
+  font-weight: 400;
+  font-size: 10pt;
+  text-transform: none;
+  color: var(--cinza);
+  letter-spacing: 0;
+}
+
+/* ===== QUESTÕES ===== */
+.questao {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.questao-num {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 11pt;
+  min-width: 28px;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+.questao-corpo { flex: 1; }
+.questao-tipo {
+  font-family: var(--sans);
+  font-size: 8.5pt;
+  color: var(--cinza-claro);
+  font-style: italic;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.questao-enunciado {
+  font-size: 11pt;
+  line-height: 1.7;
+}
+.questao-enunciado p { margin-bottom: 5px; }
+.questao-enunciado p:last-child { margin-bottom: 0; }
+.questao-enunciado strong { font-weight: 700; }
+.questao-enunciado em { font-style: italic; color: var(--cinza); }
+
+/* ===== DADOS / CIRCUITO ===== */
+.dados {
+  background: var(--bg-campo);
+  border: 1px solid var(--borda);
+  border-left: 3px solid #666;
+  padding: 8px 14px;
+  margin: 8px 0;
+  font-family: var(--sans);
+  font-size: 10.5pt;
+}
+.dados .dados-titulo {
+  font-weight: 700;
+  font-size: 8.5pt;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--cinza);
+  margin-bottom: 5px;
+}
+.dados ul { list-style: disc; padding-left: 18px; }
+.dados li { margin-bottom: 2px; }
+.dados li span { font-weight: 700; font-family: var(--mono); }
+
+/* ===== FÓRMULAS ===== */
+.formula {
+  background: var(--bg-campo);
+  border: 1px solid var(--borda);
+  padding: 8px 14px;
+  margin: 8px 0;
+  font-family: var(--mono);
+  font-size: 10.5pt;
+  text-align: center;
+}
+
+/* ===== SVG CIRCUITOS ===== */
+.circuito-svg {
+  border: 1px solid var(--borda);
+  padding: 10px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  background: #fafafa;
+}
+
+/* ===== RODAPÉ ===== */
+.rodape {
+  margin-top: 28px;
+  border-top: 1px solid var(--borda);
+  padding-top: 8px;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 9pt;
+  color: var(--cinza-claro);
+}
+
+/* ===== IMPRESSÃO ===== */
+@media print {
+  body { background: #fff; }
+  .pagina { box-shadow: none; margin: 0; padding: 1.5cm 2cm; }
+  .questao { break-inside: avoid; }
+  .secao { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="pagina">
+
+  <!-- CABEÇALHO -->
+  <div class="cabecalho">
+    <img src="fig/ifrn.png" alt="IFRN">
+  </div>
+  <div class="cabecalho-curso">Curso Técnico Integrado em Informática</div>
+  <hr class="linha-hr">
+
+  <div class="linha-nome-data">
+    <span class="label">Nome:</span>
+    <span class="nome-sublinhado"></span>
+    <span class="data-campo">Data: 21/03/2026</span>
+  </div>
+
+  <div class="titulo-disciplina">Eletrônica Analógica</div>
+  <div class="subtitulo-lista">Lista de Questões — Diodos Semicondutores e Aplicações &nbsp;|&nbsp; 40 questões</div>
+
+  <!-- ===== SEÇÃO 1 ===== -->
+  <section class="secao">
+    <div class="secao-titulo">1. Teoria do Diodo Semicondutor <span class="intervalo">(Q1 – Q8)</span></div>
+
+    <div class="questao">
+      <div class="questao-num">1.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>Explique a formação da <strong>junção PN</strong> em um diodo semicondutor. Por que surge uma zona de depleção? O que é a tensão de barreira (V<sub>0</sub>) e qual é seu valor típico para diodos de silício e germânio?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">2.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>Descreva a <strong>curva característica corrente-tensão (I × V)</strong> do diodo. Quais são as três regiões de operação? O que acontece com a corrente em cada região?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">3.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>Qual a diferença entre o <strong>modelo ideal</strong>, o <strong>modelo de tensão de barreira constante</strong> e o <strong>modelo com resistência de bulk</strong> de um diodo? Em que situação cada modelo é mais adequado?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">4.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>Usando a <strong>equação de Shockley</strong>, calcule a corrente em um diodo de silício para V<sub>D</sub> = 0,65 V. Considere I<sub>s</sub> = 10 nA, n = 1 e V<sub>T</sub> = 26 mV (temperatura ambiente).</p>
+          <div class="formula">I = I<sub>s</sub> · (e<sup>V<sub>D</sub> / n·V<sub>T</sub></sup> − 1)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">5.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>Explique os fenômenos de <strong>avalanche</strong> e <strong>efeito Zener</strong> que ocorrem na ruptura reversa de um diodo. Qual a diferença entre os dois? Como identificar qual predomina em um dado diodo?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">6.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>Um diodo de silício tem corrente de saturação I<sub>s</sub> = 5 nA. Calcule sua <strong>resistência dinâmica</strong> (r<sub>d</sub>) na temperatura ambiente (V<sub>T</sub> = 26 mV) quando opera com uma corrente I<sub>D</sub> = 10 mA.</p>
+          <div class="formula">r<sub>d</sub> = n · V<sub>T</sub> / I<sub>D</sub></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">7.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>O que é o <strong>tempo de recuperação reversa</strong> (t<sub>rr</sub>) de um diodo? Por que esse parâmetro é crítico em aplicações de alta frequência? Como os diodos Schottky se diferenciam dos diodos de junção PN nesse aspecto?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">8.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>No circuito abaixo, determine a corrente I<sub>D</sub> e a tensão V<sub>D</sub>. Use o <strong>modelo de segunda aproximação</strong> (V<sub>D</sub> = 0,7 V quando em condução).</p>
+          <div class="dados">
+            <div class="dados-titulo">Dados</div>
+            <ul>
+              <li>V<sub>s</sub> = <span>10 V</span> (fonte)</li>
+              <li>R = <span>2,2 kΩ</span></li>
+              <li>Diodo Si: <span>V<sub>D</sub> = 0,7 V</span></li>
+            </ul>
+          </div>
+          <div class="circuito-svg">
+            <svg width="340" height="110" viewBox="0 0 340 110">
+              <defs>
+                <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L8,3 z" fill="#333"/>
+                </marker>
+              </defs>
+              <line x1="20" y1="30" x2="80" y2="30" stroke="#222" stroke-width="1.5"/>
+              <rect x="80" y="20" width="60" height="20" rx="3" fill="none" stroke="#222" stroke-width="1.5"/>
+              <text x="110" y="16" fill="#444" font-size="11" text-anchor="middle" font-family="sans-serif">R = 2,2 kΩ</text>
+              <line x1="140" y1="30" x2="190" y2="30" stroke="#222" stroke-width="1.5"/>
+              <polygon points="190,18 190,42 218,30" fill="rgba(0,0,0,0.08)" stroke="#222" stroke-width="1.5"/>
+              <line x1="218" y1="18" x2="218" y2="42" stroke="#222" stroke-width="2"/>
+              <line x1="218" y1="30" x2="260" y2="30" stroke="#222" stroke-width="1.5"/>
+              <line x1="260" y1="30" x2="320" y2="30" stroke="#222" stroke-width="1.5"/>
+              <line x1="260" y1="30" x2="260" y2="80" stroke="#222" stroke-width="1.5"/>
+              <line x1="240" y1="80" x2="280" y2="80" stroke="#222" stroke-width="1.5"/>
+              <line x1="248" y1="86" x2="272" y2="86" stroke="#222" stroke-width="1.5"/>
+              <line x1="256" y1="92" x2="264" y2="92" stroke="#222" stroke-width="1.5"/>
+              <line x1="20" y1="30" x2="20" y2="80" stroke="#222" stroke-width="1.5"/>
+              <circle cx="20" cy="55" r="14" fill="none" stroke="#222" stroke-width="1.5"/>
+              <text x="20" y="59" fill="#222" font-size="12" text-anchor="middle" font-weight="bold" font-family="sans-serif">Vs</text>
+              <line x1="20" y1="70" x2="20" y2="80" stroke="#222" stroke-width="1.5"/>
+              <line x1="6" y1="80" x2="34" y2="80" stroke="#222" stroke-width="1.5"/>
+              <line x1="10" y1="86" x2="30" y2="86" stroke="#222" stroke-width="1.5"/>
+              <line x1="14" y1="92" x2="26" y2="92" stroke="#222" stroke-width="1.5"/>
+              <text x="239" y="25" fill="#333" font-size="11" font-family="sans-serif">+</text>
+              <text x="185" y="25" fill="#333" font-size="11" font-family="sans-serif">+</text>
+              <text x="175" y="25" fill="#333" font-size="11" font-family="sans-serif">−</text>
+              <text x="155" y="22" fill="#555" font-size="10" font-family="sans-serif">V<tspan font-size="8" dy="2">D</tspan></text>
+              <path d="M290,30 L310,30" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+              <text x="298" y="22" fill="#333" font-size="10" font-family="sans-serif">I<tspan font-size="8" dy="2">D</tspan></text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== SEÇÃO 2 ===== -->
+  <section class="secao">
+    <div class="secao-titulo">2. Retificador de Meia Onda <span class="intervalo">(Q9 – Q12)</span></div>
+
+    <div class="questao">
+      <div class="questao-num">9.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>Explique o funcionamento de um <strong>retificador de meia onda</strong>. Por que apenas metade do ciclo da tensão CA é aproveitada? Qual é a desvantagem principal desse circuito em comparação com o retificador de onda completa?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">10.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>Um retificador de meia onda é alimentado por um transformador com tensão secundária de <strong>24 V RMS</strong>. A carga é R<sub>L</sub> = 1 kΩ. Calcule:</p>
+          <p><em>(a) Tensão de pico V<sub>pico</sub>; (b) Tensão média de saída V<sub>dc</sub>; (c) Corrente média I<sub>dc</sub>; (d) PIV do diodo.</em></p>
+          <div class="formula">V<sub>pico</sub> = V<sub>rms</sub> × √2 &nbsp;|&nbsp; V<sub>dc</sub> = V<sub>pico</sub> / π &nbsp;|&nbsp; PIV = V<sub>pico</sub></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">11.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>Calcule o <strong>fator de ripple</strong> (r) e a <strong>eficiência de retificação</strong> (η) de um retificador de meia onda ideal (sem queda no diodo).</p>
+          <div class="formula">r = V<sub>rms,ripple</sub> / V<sub>dc</sub> &nbsp;|&nbsp; η = P<sub>dc</sub> / P<sub>ac</sub> × 100%</div>
+          <p><em>Dica: V<sub>rms</sub>(saída meia onda) = V<sub>pico</sub> / 2 &nbsp;|&nbsp; V<sub>dc</sub> = V<sub>pico</sub> / π</em></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">12.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Análise de Circuito</div>
+        <div class="questao-enunciado">
+          <p>No circuito de retificador meia onda, o osciloscópio mostra na entrada: senoide de <strong>170 V de pico</strong> a 60 Hz. O diodo é de silício (V<sub>D</sub> = 0,7 V) e R<sub>L</sub> = 4,7 kΩ. Determine: (a) tensão de pico na saída; (b) tensão média; (c) valor de pico da tensão reversa no diodo durante o semiciclo negativo.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== SEÇÃO 3 ===== -->
+  <section class="secao">
+    <div class="secao-titulo">3. Retificador de Onda Completa <span class="intervalo">(Q13 – Q17)</span></div>
+
+    <div class="questao">
+      <div class="questao-num">13.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>Compare o <strong>retificador em ponte de Graetz</strong> com o <strong>retificador de tap central</strong>. Descreva o caminho da corrente em cada semiciclo para ambos os circuitos. Qual a diferença no PIV necessário para os diodos?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">14.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>Um retificador em <strong>ponte completa</strong> é alimentado por um transformador de 24 V RMS (secundário). Calcule: (a) V<sub>pico</sub> da saída; (b) V<sub>dc</sub>; (c) I<sub>dc</sub> para R<sub>L</sub> = 470 Ω; (d) frequência do ripple; (e) PIV dos diodos.</p>
+          <div class="formula">V<sub>dc</sub> = 2 · V<sub>pico</sub> / π &nbsp; (onda completa)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">15.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>Um transformador com <strong>tap central</strong> fornece 15-0-15 V RMS (30 V total). Utilizando 2 diodos de silício em configuração tap central, calcule: (a) V<sub>dc</sub> de saída; (b) PIV dos diodos. Compare o PIV com uma ponte usando o mesmo transformador de 30 V total.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">16.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Análise de Circuito</div>
+        <div class="questao-enunciado">
+          <p>Em um retificador de onda completa em ponte, um dos quatro diodos está em <strong>curto-circuito</strong> (falha). Descreva qual será o comportamento do circuito e qual forma de onda aparecerá na saída. Qual componente pode ser danificado?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">17.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>Calcule o <strong>fator de ripple</strong> e a <strong>eficiência de retificação</strong> de um retificador de onda completa ideal. Compare com o retificador de meia onda.</p>
+          <div class="formula">V<sub>dc</sub>(OC) = 2V<sub>p</sub>/π &nbsp;|&nbsp; V<sub>rms</sub>(OC) = V<sub>p</sub>/√2 &nbsp;|&nbsp; r = √((V<sub>rms</sub>/V<sub>dc</sub>)² − 1)</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== SEÇÃO 4 ===== -->
+  <section class="secao">
+    <div class="secao-titulo">4. Filtro Capacitivo <span class="intervalo">(Q18 – Q22)</span></div>
+
+    <div class="questao">
+      <div class="questao-num">18.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>Explique o funcionamento do <strong>filtro capacitivo</strong> em um retificador. Por que o capacitor carrega rapidamente e descarrega lentamente? Qual equação descreve a descarga e o que é a constante de tempo τ?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">19.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>Apresente a expressão aproximada da <strong>tensão de ripple</strong> (V<sub>r</sub>) para um retificador de onda completa com filtro capacitivo. Usando essa expressão, calcule o ripple para: V<sub>pico</sub> = 20 V, I<sub>L</sub> = 100 mA, C = 1000 µF, f = 60 Hz.</p>
+          <div class="formula">V<sub>r</sub> ≈ I<sub>L</sub> / (2 · f · C) &nbsp; (onda completa)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">20.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Projeto</div>
+        <div class="questao-enunciado">
+          <p>Projete o <strong>capacitor de filtro</strong> para uma fonte de alimentação com as seguintes especificações. Determine o valor mínimo de C e indique um valor comercial adequado.</p>
+          <div class="dados">
+            <div class="dados-titulo">Especificações</div>
+            <ul>
+              <li>Retificador: <span>Onda Completa (ponte)</span></li>
+              <li>Tensão de saída: <span>12 V CC</span></li>
+              <li>Corrente de carga máx.: <span>500 mA</span></li>
+              <li>Ripple máx. admissível: <span>10% de V<sub>dc</sub></span></li>
+              <li>Frequência da rede: <span>60 Hz</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">21.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Análise de Circuito</div>
+        <div class="questao-enunciado">
+          <p>Um retificador de onda completa com filtro tem: V<sub>pico</sub> = 25 V, C = 2200 µF, R<sub>L</sub> = 100 Ω, f = 60 Hz. Calcule: (a) tensão média de saída V<sub>dc</sub>; (b) ripple V<sub>r</sub>; (c) constante de tempo τ; (d) corrente de pico no diodo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">22.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>Por que o capacitor de filtro em uma fonte de alimentação provoca <strong>correntes de pico muito altas</strong> nos diodos? Quais problemas práticos isso causa e como é possível mitigar esse efeito?</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== SEÇÃO 5 ===== -->
+  <section class="secao">
+    <div class="secao-titulo">5. Regulador de Tensão com Diodo Zener <span class="intervalo">(Q23 – Q26)</span></div>
+
+    <div class="questao">
+      <div class="questao-num">23.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>Explique como um <strong>regulador de tensão com diodo Zener</strong> mantém a tensão de saída constante apesar de variações na tensão de entrada ou na corrente de carga. O que é a <strong>resistência dinâmica Zener</strong> (r<sub>z</sub>) e como ela afeta a regulação?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">24.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Projeto</div>
+        <div class="questao-enunciado">
+          <p>Projete um <strong>regulador Zener</strong> com as especificações abaixo. Determine: (a) valor do resistor série R<sub>s</sub>; (b) potência mínima do Zener; (c) verifique se o Zener opera corretamente nos dois extremos de V<sub>in</sub>.</p>
+          <div class="dados">
+            <div class="dados-titulo">Especificações</div>
+            <ul>
+              <li>V<sub>Z</sub> = <span>5,1 V</span></li>
+              <li>V<sub>in</sub>: <span>8 V a 12 V</span></li>
+              <li>I<sub>L</sub> = <span>0 a 80 mA</span></li>
+              <li>I<sub>Z,min</sub> = <span>5 mA</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">25.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>Um regulador Zener tem: V<sub>Z</sub> = 9,1 V, R<sub>s</sub> = 100 Ω, r<sub>z</sub> = 8 Ω. A tensão de entrada varia de 15 V a 18 V. Calcule a <strong>regulação de linha</strong> (variação de V<sub>out</sub> para variação em V<sub>in</sub>) considerando a resistência dinâmica do Zener.</p>
+          <div class="formula">ΔV<sub>out</sub> = ΔV<sub>in</sub> × r<sub>z</sub> / (R<sub>s</sub> + r<sub>z</sub>)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">26.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Análise de Circuito</div>
+        <div class="questao-enunciado">
+          <p>No circuito com diodo Zener 12 V e R<sub>s</sub> = 220 Ω, determine se o Zener está em <strong>regulação ou em corte</strong> para cada condição, e calcule V<sub>out</sub> em cada caso.</p>
+          <div class="dados">
+            <div class="dados-titulo">Condições</div>
+            <ul>
+              <li>Caso A: V<sub>in</sub> = <span>18 V</span>, R<sub>L</sub> = <span>1 kΩ</span></li>
+              <li>Caso B: V<sub>in</sub> = <span>10 V</span>, R<sub>L</sub> = <span>1 kΩ</span></li>
+              <li>Caso C: V<sub>in</sub> = <span>18 V</span>, sem carga (<span>R<sub>L</sub> = ∞</span>)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== SEÇÃO 6 ===== -->
+  <section class="secao">
+    <div class="secao-titulo">6. Ceifadores (Clippers) <span class="intervalo">(Q27 – Q30)</span></div>
+
+    <div class="questao">
+      <div class="questao-num">27.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>O que é um <strong>circuito ceifador (clipper)</strong>? Explique a diferença entre ceifador série e paralelo. Em quais aplicações práticas os ceifadores são utilizados?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">28.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Análise de Circuito</div>
+        <div class="questao-enunciado">
+          <p>Analise o circuito ceifador abaixo. A entrada é uma senoide de <strong>±10 V de pico</strong>. Descreva detalhadamente a forma de onda de saída V<sub>out</sub>, indicando os valores nos semiciclos positivo e negativo.</p>
+          <div class="dados">
+            <div class="dados-titulo">Circuito: ceifador paralelo com referência</div>
+            <ul>
+              <li>R = <span>1 kΩ</span> (série com entrada)</li>
+              <li>D1 = <span>Si, polarização direta em paralelo com saída</span></li>
+              <li>V<sub>ref</sub> = <span>+3 V</span> (em série com o diodo, anodo conectado ao nó de saída)</li>
+            </ul>
+          </div>
+          <p><em>O diodo D1 tem o catodo em +3 V (referência) e o anodo no nó de saída. O diodo conduz quando V<sub>out</sub> > V<sub>ref</sub> + V<sub>D</sub>.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">29.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Análise de Circuito</div>
+        <div class="questao-enunciado">
+          <p>Um ceifador duplo usa dois diodos Zener em série (catodo com catodo), em paralelo com a saída, com R = 2,2 kΩ em série. V<sub>Z1</sub> = V<sub>Z2</sub> = 6,2 V. A entrada é senoide de ±15 V de pico. Determine a forma de onda de saída e os valores de pico positivo e negativo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">30.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Projeto</div>
+        <div class="questao-enunciado">
+          <p>Projete um <strong>ceifador de proteção</strong> para a entrada de um microcontrolador (tensão máxima admissível: 3,3 V) que pode receber sinais de até ±12 V. O circuito deve limitar V<sub>out</sub> entre 0 V e 3,3 V (lógica positiva). Use diodos Schottky e a alimentação de 3,3 V disponível. Determine R<sub>série</sub> mínimo para corrente máxima de 5 mA nos diodos.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== SEÇÃO 7 ===== -->
+  <section class="secao">
+    <div class="secao-titulo">7. Grampeadores de Tensão (Clampers) <span class="intervalo">(Q31 – Q33)</span></div>
+
+    <div class="questao">
+      <div class="questao-num">31.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>O que é um <strong>circuito grampeador (clamper)</strong>? Qual a diferença fundamental entre um grampeador e um ceifador? Explique o papel do capacitor no grampeador e por que a constante de tempo τ deve ser muito maior que o período do sinal.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">32.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Análise de Circuito</div>
+        <div class="questao-enunciado">
+          <p>Um grampeador positivo tem: capacitor C em série, diodo com anodo em GND e catodo no nó entre C e R<sub>L</sub>. A entrada é V<sub>in</sub> = 10 sin(ωt) V. Determine: (a) a tensão que o capacitor armazena; (b) a expressão de V<sub>out</sub>(t); (c) os valores de pico positivo e negativo de V<sub>out</sub>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">33.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Análise de Circuito</div>
+        <div class="questao-enunciado">
+          <p>Um grampeador com referência tem: C em série, diodo com anodo no nó de saída e catodo em V<sub>ref</sub> = +5 V. A entrada é V<sub>in</sub> = 8 sin(ωt) V (pico = 8 V). Use o modelo ideal (V<sub>D</sub> = 0). Determine V<sub>out</sub>(t) e os picos de saída.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== SEÇÃO 8 ===== -->
+  <section class="secao">
+    <div class="secao-titulo">8. LED — Diodo Emissor de Luz <span class="intervalo">(Q34 – Q36)</span></div>
+
+    <div class="questao">
+      <div class="questao-num">34.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>Explique o princípio de funcionamento de um <strong>LED</strong>. Por que o LED emite luz enquanto um diodo de silício comum não emite? O que determina a <strong>cor da luz</strong> emitida? Por que LEDs azuis e brancos foram uma conquista tecnológica (Nobel de Física 2014)?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">35.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Projeto</div>
+        <div class="questao-enunciado">
+          <p>Projete o <strong>resistor limitador de corrente</strong> para cada LED da tabela abaixo, com alimentação de V<sub>cc</sub> = 5 V. Calcule também a potência dissipada em cada resistor.</p>
+          <div class="dados">
+            <div class="dados-titulo">LEDs</div>
+            <ul>
+              <li>Vermelho: <span>V<sub>F</sub> = 2,0 V, I<sub>F</sub> = 20 mA</span></li>
+              <li>Verde: <span>V<sub>F</sub> = 2,2 V, I<sub>F</sub> = 20 mA</span></li>
+              <li>Azul: <span>V<sub>F</sub> = 3,3 V, I<sub>F</sub> = 20 mA</span></li>
+              <li>Branco: <span>V<sub>F</sub> = 3,4 V, I<sub>F</sub> = 20 mA</span></li>
+            </ul>
+          </div>
+          <div class="formula">R = (V<sub>cc</sub> − V<sub>F</sub>) / I<sub>F</sub> &nbsp;&nbsp; P<sub>R</sub> = (V<sub>cc</sub> − V<sub>F</sub>) × I<sub>F</sub></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">36.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>Um sistema de iluminação usa <strong>100 LEDs brancos</strong> em paralelo, cada um com V<sub>F</sub> = 3,4 V e I<sub>F</sub> = 30 mA, alimentados por fonte de 3,6 V. Em comparação, uma lâmpada incandescente equivalente consome 60 W a 220 V. Calcule: (a) potência total dos LEDs; (b) corrente total da fonte; (c) compare a eficiência considerando que os LEDs fornecem ~150 lm/W e a incandescente ~15 lm/W.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== SEÇÃO 9 ===== -->
+  <section class="secao">
+    <div class="secao-titulo">9. Fotodiodos e Acopladores Ópticos <span class="intervalo">(Q37 – Q40)</span></div>
+
+    <div class="questao">
+      <div class="questao-num">37.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>Explique o princípio de funcionamento de um <strong>fotodiodo</strong>. O que é o <strong>efeito fotovoltaico</strong>? Diferencie os modos de operação <strong>fotovoltaico</strong> e <strong>fotocondutivo</strong>. Em qual modo o fotodiodo é mais linear? Em qual é mais rápido?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">38.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Teórica</div>
+        <div class="questao-enunciado">
+          <p>O que é um <strong>acoplador óptico (optoisolador)</strong>? Explique sua estrutura interna e seu princípio de funcionamento. Por que o isolamento galvânico é sua principal vantagem? Cite pelo menos três aplicações práticas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">39.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Cálculo</div>
+        <div class="questao-enunciado">
+          <p>Um acoplador óptico <strong>4N25</strong> tem CTR (taxa de transferência de corrente) mínimo de 20%. O LED é alimentado com V<sub>cc1</sub> = 5 V através de R<sub>in</sub> = 330 Ω (V<sub>LED</sub> = 1,2 V). O coletor do fototransistor está conectado a V<sub>cc2</sub> = 12 V através de R<sub>c</sub> = 1 kΩ. Calcule: (a) corrente no LED; (b) corrente mínima no coletor; (c) tensão V<sub>ce</sub> em modo ativo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="questao">
+      <div class="questao-num">40.</div>
+      <div class="questao-corpo">
+        <div class="questao-tipo">Projeto</div>
+        <div class="questao-enunciado">
+          <p>Projete um circuito completo de <strong>detecção de zero da rede elétrica</strong> usando um acoplador óptico PC817 para um microcontrolador de 3,3 V. A rede é 127 V / 60 Hz. Determine: (a) resistor série para o LED do optoacoplador (I<sub>LED</sub> = 5 mA em pico); (b) resistor de pull-up no coletor; (c) explique a forma de onda na saída e como o MCU detecta o cruzamento por zero.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="rodape">
+    <strong>Eletrônica Analógica — IFRN 2026</strong> &nbsp;|&nbsp; Lista de Questões: Diodos Semicondutores &nbsp;|&nbsp; 40 questões
+  </div>
+
+</div><!-- /pagina -->
+
+</body>
+</html>

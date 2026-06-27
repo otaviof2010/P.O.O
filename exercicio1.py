@@ -1,4 +1,4 @@
-'''
+
 print ('QUESTÃO 1')
 class pessoa:
     def __init__(self, nome, idade,peso,altura):
@@ -30,13 +30,15 @@ idade = int(input("Digite a idade da pessoa: "))
 peso = float(input("Digite o peso da pessoa: "))
 altura = float(input("Digite a altura da pessoa: "))
 
+pessoa1 = pessoa(nome, idade, peso, altura)
+
 s = input("você engordou ou emagreceu? (Digite 'engordou' ou 'emagreceu'): ")
 if s == 'engordou':
     valorengordar = float(input("Digite o valor para engordar a pessoa: "))
-    valoremagrecer = 0
+    pessoa1.engordar(valorengordar)
 elif s == 'emagreceu':
     valoremagrecer = float(input("Digite o valor para emagrecer a pessoa: "))
-    valorengordar = 0
+    pessoa1.emagrecer(valoremagrecer)
 else:
     print("Opção inválida. A pessoa não engordou nem emagreceu.")
     valorengordar = 0
@@ -55,7 +57,7 @@ else:
     envelhecer = False
 
 
-pessoa1 = pessoa(nome, idade, peso, altura)
+
 pessoa1.envelhecer()
 pessoa1.engordar(valorengordar)
 pessoa1.crescer(valorcrescer)
@@ -70,7 +72,12 @@ class conta:
         self.saldo = saldo
         self.limite = limite
         self.codigo_tipo = codigo_tipo
-        self.nome_tipo = nome_tipo
+        if self.codigo_tipo == 1:
+            self.nome_tipo = 'conta corrente'
+        elif self.codigo_tipo == 2:
+            self.nome_tipo = 'conta poupança'
+        else:
+            print('inválido')
 
     def deposita(self, valor):
         self.saldo += valor
